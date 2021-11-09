@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 import search from '../../assets/images/search.svg';
-import { getHistory, getWeather } from '../../redux/weather-reducer';
+import { getWeather } from '../../redux/weather-reducer';
 import { getSearchValue } from '../../redux/search-reducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -29,16 +29,19 @@ class Search extends React.Component {
             <button
               onClick={() => {
                 this.props.getWeather(this.props.search);
-                this.props.getHistory(this.props.search);
               }}
             >
               Search
             </button>
           </div>
           <div className={`${style.searchResult} ${style.item}`}>
-            <span>
-              {`${this.props.city}`} (Today): + {`${this.props.weather}`}
-            </span>
+            {!this.props.error ? (
+              <span>
+                {`${this.props.city}`} (Today): + {`${this.props.weather}`}
+              </span>
+            ) : (
+              <span>Please enter the correct city name</span>
+            )}
           </div>
         </div>
       </div>
@@ -46,14 +49,15 @@ class Search extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     weather: state.weather.weather,
     city: state.weather.city,
     search: state.search.searchValue,
+    error: state.weather.errorFromSearch,
   };
 };
 
 export default compose(
-  connect(mapStateToProps, { getWeather, getSearchValue, getHistory })
+  connect(mapStateToProps, { getWeather, getSearchValue })
 )(Search);

@@ -1,10 +1,10 @@
-let SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
+const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 
-let initialState = {
+const initialState = {
   searchValue: '',
 };
 
-let searchReducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH_VALUE:
       return {
@@ -21,7 +21,7 @@ export const setSearchValue = (searchValue) => ({
   searchValue,
 });
 
-export let getSearchValue = (searchValue) => {
+export const getSearchValue = (searchValue) => {
   return async (dispatch) => {
     dispatch(setSearchValue(searchValue));
   };
