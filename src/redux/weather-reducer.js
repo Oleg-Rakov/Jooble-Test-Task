@@ -26,8 +26,8 @@ let weatherReducer = (state = initialState, action) => {
       return {
         ...state,
         history: [
-          ...state.history,
           { id: action.id, city: action.city, date: Date.now() },
+          ...state.history,
         ],
       };
     default:

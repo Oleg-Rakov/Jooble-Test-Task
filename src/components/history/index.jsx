@@ -11,9 +11,11 @@ class History extends React.Component {
         <h1>Search history</h1>
         <div className={style.wrapper}>
           {this.props.history
+            .slice(0, 10)
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
             .map((item) => {
               return (
-                <div key={item.id}>
+                <div key={item.date}>
                   <span
                     onClick={() => this.props.getWeather(item.city)}
                     className={style.item_city}
@@ -22,8 +24,7 @@ class History extends React.Component {
                   </span>
                 </div>
               );
-            })
-            .sort((a, b) => new Date(b.date) - new Date(a.date))}
+            })}
         </div>
       </div>
     );
@@ -31,6 +32,7 @@ class History extends React.Component {
 }
 
 let mapStateToProps = (state) => {
+  console.log(state);
   return {
     history: state.weather.history,
   };
