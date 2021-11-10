@@ -37,7 +37,7 @@ class Search extends React.Component {
           <div className={`${style.searchResult} ${style.item}`}>
             {!this.props.error ? (
               <span>
-                {`${this.props.city}`} (Today): + {`${this.props.weather}`}
+                {`${this.props.city}`} (Today): {`${this.props.weather}°C`}
               </span>
             ) : (
               <span>Please enter the correct city name</span>
